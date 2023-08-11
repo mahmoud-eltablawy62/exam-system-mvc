@@ -13,7 +13,5 @@ namespace exam_system.Models
         public Student Studs { get; set; }
         public Instractor Incs { get; set; }    
 
-
-
     }
 }

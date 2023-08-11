@@ -9,7 +9,7 @@ namespace exam_system.Models
         public string Email { get; set; }
         public string Password { get; set; }
          
-        public List<Quesions> Ques { get; set; } 
+        public List<Questions> Ques { get; set; } 
         public List <Ins_Stud> ins_studs { get ; set; }   
     }
 }

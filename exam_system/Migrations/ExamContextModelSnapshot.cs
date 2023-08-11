@@ -29,12 +29,7 @@ namespace exam_system.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Ques_id")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("Ques_id");
 
                     b.ToTable("exams");
                 });
@@ -94,7 +89,7 @@ namespace exam_system.Migrations
                     b.ToTable("instractors");
                 });
 
-            modelBuilder.Entity("exam_system.Models.Quesions", b =>
+            modelBuilder.Entity("exam_system.Models.Questions", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -110,6 +105,9 @@ namespace exam_system.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("exam_id")
+                        .HasColumnType("int");
+
                     b.Property<string>("head")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -119,9 +117,11 @@ namespace exam_system.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("exam_id");
+
                     b.HasIndex("ins_id");
 
-                    b.ToTable("quests");
+                    b.ToTable("questions");
                 });
 
             modelBuilder.Entity("exam_system.Models.Student", b =>
@@ -150,17 +150,6 @@ namespace exam_system.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("students");
-                });
-
-            modelBuilder.Entity("exam_system.Models.Exam", b =>
-                {
-                    b.HasOne("exam_system.Models.Quesions", "Ques")
-                        .WithMany()
-                        .HasForeignKey("Ques_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ques");
                 });
 
             modelBuilder.Entity("exam_system.Models.Exam_Student", b =>
@@ -201,13 +190,21 @@ namespace exam_system.Migrations
                     b.Navigation("Studs");
                 });
 
-            modelBuilder.Entity("exam_system.Models.Quesions", b =>
+            modelBuilder.Entity("exam_system.Models.Questions", b =>
                 {
+                    b.HasOne("exam_system.Models.Exam", "Exams")
+                        .WithMany()
+                        .HasForeignKey("exam_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("exam_system.Models.Instractor", "Ins")
                         .WithMany("Ques")
                         .HasForeignKey("ins_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Exams");
 
                     b.Navigation("Ins");
                 });
