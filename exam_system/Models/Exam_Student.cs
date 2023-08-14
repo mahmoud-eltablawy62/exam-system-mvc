@@ -9,8 +9,8 @@ namespace exam_system.Models
         [ForeignKey("exams")]
         public int Ex_Id { get; set; }
         [ForeignKey("stds")]
-        public int Stu_Id { get; set; }
+        public int? Stu_Id { get; set; }
         public Exam exams { get; set; }
-        public Student stds { get; set; }
+        public Student? stds { get; set; }
     }
 }

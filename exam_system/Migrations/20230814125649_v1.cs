@@ -44,7 +44,7 @@ namespace exam_system.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     grade = table.Column<int>(type: "int", nullable: false)
                 },
@@ -63,7 +63,7 @@ namespace exam_system.Migrations
                     body = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     answer = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ins_id = table.Column<int>(type: "int", nullable: false),
-                    exam_id = table.Column<int>(type: "int", nullable: false)
+                    exam_id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -72,8 +72,7 @@ namespace exam_system.Migrations
                         name: "FK_questions_exams_exam_id",
                         column: x => x.exam_id,
                         principalTable: "exams",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_questions_instractors_ins_id",
                         column: x => x.ins_id,
@@ -149,6 +148,12 @@ namespace exam_system.Migrations
                 name: "IX_questions_ins_id",
                 table: "questions",
                 column: "ins_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_students_email",
+                table: "students",
+                column: "email",
+                unique: true);
         }
 
         /// <inheritdoc />

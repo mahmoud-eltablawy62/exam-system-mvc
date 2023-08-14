@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using exam_system.viewModels;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace exam_system.Models
 {
@@ -14,5 +16,13 @@ namespace exam_system.Models
         {
             optionsBuilder.UseSqlServer("Server=.;Database=exam_System;Trusted_Connection=True;TrustServerCertificate=True");
         }
-     }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Student>()
+                .HasIndex(p => p.email)
+                .IsUnique();
+        }
+
+    }
 }
+

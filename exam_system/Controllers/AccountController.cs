@@ -40,16 +40,23 @@ namespace exam_system.Controllers
         [HttpPost]
         public IActionResult Registerion_ins(ins_reg ins_reg)
         {
-            Instractor ins = new Instractor()
+            if (ModelState.IsValid)
             {
-                Id = ins_reg.Id,
-                Name = ins_reg.Name,
-                Email = ins_reg.Email,
-                Password = ins_reg.Password,
-            };
-            context.instractors.Add(ins);
-            context.SaveChanges();
-            return RedirectToAction("Index", "Home");
+                Instractor ins = new Instractor()
+                {
+                    Id = ins_reg.Id,
+                    Name = ins_reg.Name,
+                    Email = ins_reg.Email,
+                    Password = ins_reg.Password,
+                };
+                context.instractors.Add(ins);
+                context.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View(ins_reg);
+            }
         }
 
 
@@ -73,10 +80,12 @@ namespace exam_system.Controllers
                         ModelState.AddModelError("", "Wrong Email or password");
                         return View(loginVM);
                     }
-                    
-                    //HttpContext.Session.SetInt32("UserID", ins.Id);
-                   // HttpContext.Session.SetString("UserName", ins.Name);
-                   // HttpContext.Session.SetString("UserType", "Instractor");
+
+                    HttpContext.Session.SetInt32("UserID", ins.Id);
+                    HttpContext.Session.SetString("UserName", ins.Name);
+                    HttpContext.Session.SetString("UserType", "Instractor");
+                    return RedirectToAction("Index", "instractor_");
+
                 }
                 else
                 {
@@ -86,20 +95,24 @@ namespace exam_system.Controllers
                         ModelState.AddModelError("", "Wrong Email or password");
                         return View(loginVM);
                     }
-                    
-                   // HttpContext.Session.SetInt32("UserID", student.Id);
-                   // HttpContext.Session.SetString("UserName", student.Name);
-                   // HttpContext.Session.SetString("UserType", "Student");
-                }
 
-                return RedirectToAction("Index", "Home");
+                    HttpContext.Session.SetInt32("UserID", student.Id);
+                    HttpContext.Session.SetString("UserName", student.Name);
+                    HttpContext.Session.SetString("UserType", "Student");
+                    return RedirectToAction("Index", "Home");
+                }             
             }
             else
             {
-                
                 return View(loginVM);
             }
 
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
     }
     }

@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    int index = 1;
+}
+@model List<Questions>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">head</th>
+            <th scope="col">body</th>
+            <th scope="col">answer</th>
+            <th scope="col">Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var data in Model)
+        {
+        <tr>
+            <th scope="row">@(index++)</th>
+            <td>@data.head</td>
+            <td>@data.body</td>    
+            <td>@data.answer</td>
+            <td>
+                    <a href="#"> <i class="fa-solid fa-trash"></i> </a>
+                    <a href="/instractor_/Update/@data.Id"> <i class="fa-solid fa-pen-to-square"></i> </a>
+            </td>
+        </tr>
+         }      
+    </tbody>
+</table>
+
+<a href="/instractor_/add" class="link-info">Add_Question</a>

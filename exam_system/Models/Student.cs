@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Newtonsoft.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace exam_system.Models
 {
@@ -6,10 +8,12 @@ namespace exam_system.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "*")]   
         public string email { get; set; }
         public string Password { get; set; }
         public int grade { get; set; }
-        public List<Ins_Stud> ins_studs { get;}
+        public List<Ins_Stud>? ins_studs { get;}
         
        
     }

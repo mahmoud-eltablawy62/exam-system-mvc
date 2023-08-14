@@ -5,12 +5,44 @@
       "PackagePath": "staticwebassets\\exam_system.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\CompuMisr\\Desktop\\exam-system-mvc\\exam_system\\wwwroot\\assets\\favicon.ico",
+      "PackagePath": "staticwebassets\\assets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\CompuMisr\\Desktop\\exam-system-mvc\\exam_system\\wwwroot\\assets\\img\\bg-masthead.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\bg-masthead.jpg"
+    },
+    {
+      "Id": "C:\\Users\\CompuMisr\\Desktop\\exam-system-mvc\\exam_system\\wwwroot\\assets\\img\\bg-signup.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\bg-signup.jpg"
+    },
+    {
+      "Id": "C:\\Users\\CompuMisr\\Desktop\\exam-system-mvc\\exam_system\\wwwroot\\assets\\img\\demo-image-01.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\demo-image-01.jpg"
+    },
+    {
+      "Id": "C:\\Users\\CompuMisr\\Desktop\\exam-system-mvc\\exam_system\\wwwroot\\assets\\img\\demo-image-02.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\demo-image-02.jpg"
+    },
+    {
+      "Id": "C:\\Users\\CompuMisr\\Desktop\\exam-system-mvc\\exam_system\\wwwroot\\assets\\img\\ipad.png",
+      "PackagePath": "staticwebassets\\assets\\img\\ipad.png"
+    },
+    {
       "Id": "C:\\Users\\CompuMisr\\Desktop\\exam-system-mvc\\exam_system\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\CompuMisr\\Desktop\\exam-system-mvc\\exam_system\\wwwroot\\css\\styles.css",
+      "PackagePath": "staticwebassets\\css\\styles.css"
+    },
+    {
       "Id": "C:\\Users\\CompuMisr\\Desktop\\exam-system-mvc\\exam_system\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\CompuMisr\\Desktop\\exam-system-mvc\\exam_system\\wwwroot\\js\\scripts.js",
+      "PackagePath": "staticwebassets\\js\\scripts.js"
     },
     {
       "Id": "C:\\Users\\CompuMisr\\Desktop\\exam-system-mvc\\exam_system\\wwwroot\\js\\site.js",

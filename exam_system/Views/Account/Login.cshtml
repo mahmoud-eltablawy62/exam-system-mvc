@@ -26,22 +26,24 @@
                                 <div class="form-outline mb-4">
                                     <label class="form-label" asp-for="Email"></label>
                                     <input type="email" asp-for="Email" class="form-control form-control-lg" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
 
                                 </div>
 
                                 <div class="form-outline mb-4">
                                     <label class="form-label" asp-for="Password"></label>
                                     <input type="password" class="form-control form-control-lg" asp-for="Password" />
-
+                                    <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
-                                
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <div class="d-flex justify-content-center">
                                     <button type="submit"
                                             class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">
                                         Log_In
                                     </button>
                                 </div>
-
+                                
+                        
                                 <p class="text-center text-muted mt-5 mb-0">
                                     Have already an account? <a href="/Account/login"
                                                                 class="fw-bold text-body"><u>Login here</u></a>
