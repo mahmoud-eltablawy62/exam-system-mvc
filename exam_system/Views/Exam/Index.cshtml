@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+ 
+@model Student 
+
+
+@if(Model.grade > 0 ){
+<form action="/exam/check" >
+<div class="text-center justify-content-center mt-9" style="height:200px">
+        <button class="btn btn-success" role="button" type="submit"  >Take The Exam</button>
+</div>
+</form>
+} else{
+    <h1> @Model.grade </h1>
+}

@@ -6,6 +6,7 @@ namespace exam_system.Models
     {
         
         public int Id { get; set; }
+        List <Questions> question { get; set; }
 
     }
 }

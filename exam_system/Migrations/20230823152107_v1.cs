@@ -29,28 +29,12 @@ namespace exam_system.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_instractors", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "students",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    grade = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_students", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -62,7 +46,8 @@ namespace exam_system.Migrations
                     head = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     body = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     answer = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ins_id = table.Column<int>(type: "int", nullable: false),
+                    answer_stud = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ins_id = table.Column<int>(type: "int", nullable: true),
                     exam_id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -77,8 +62,30 @@ namespace exam_system.Migrations
                         name: "FK_questions_instractors_ins_id",
                         column: x => x.ins_id,
                         principalTable: "instractors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "students",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    email = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    grade = table.Column<int>(type: "int", nullable: false),
+                    ins_id = table.Column<int>(type: "int", nullable: true),
+                    choice = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_students", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_students_instractors_ins_id",
+                        column: x => x.ins_id,
+                        principalTable: "instractors",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -105,39 +112,16 @@ namespace exam_system.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "ins_studs",
-                columns: table => new
-                {
-                    Stud_Id = table.Column<int>(type: "int", nullable: false),
-                    Ins_Id = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ins_studs", x => new { x.Stud_Id, x.Ins_Id });
-                    table.ForeignKey(
-                        name: "FK_ins_studs_instractors_Ins_Id",
-                        column: x => x.Ins_Id,
-                        principalTable: "instractors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ins_studs_students_Stud_Id",
-                        column: x => x.Stud_Id,
-                        principalTable: "students",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_exam_Students_Stu_Id",
                 table: "exam_Students",
                 column: "Stu_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ins_studs_Ins_Id",
-                table: "ins_studs",
-                column: "Ins_Id");
+                name: "IX_instractors_Email",
+                table: "instractors",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_questions_exam_id",
@@ -154,6 +138,11 @@ namespace exam_system.Migrations
                 table: "students",
                 column: "email",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_students_ins_id",
+                table: "students",
+                column: "ins_id");
         }
 
         /// <inheritdoc />
@@ -161,9 +150,6 @@ namespace exam_system.Migrations
         {
             migrationBuilder.DropTable(
                 name: "exam_Students");
-
-            migrationBuilder.DropTable(
-                name: "ins_studs");
 
             migrationBuilder.DropTable(
                 name: "questions");

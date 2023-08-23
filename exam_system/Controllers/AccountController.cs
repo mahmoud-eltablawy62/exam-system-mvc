@@ -12,6 +12,8 @@ namespace exam_system.Controllers
             context = new ExamContext();
         }
 
+
+
         [HttpGet]
         public IActionResult Registerion()
         {
@@ -20,17 +22,29 @@ namespace exam_system.Controllers
         [HttpPost]
         public IActionResult Registerion(student_reg std)
         {
-            Student stud = new Student()
+            try
             {
-                Id = std.Id,
-                Name = std.Name,
-                email = std.Email,
-                Password = std.Password,
-            };
-            context.students.Add(stud);
-            context.SaveChanges();
-            return RedirectToAction("Index", "Home");
+                Student stud = new Student()
+                {
+                    Id = std.Id,
+                    Name = std.Name,
+                    email = std.Email,
+                    Password = std.Password,
+                };
+                context.students.Add(stud);
+                context.SaveChanges();
+                return RedirectToAction("Login");
+            }
+            catch (Exception ex)
+
+            {
+                ModelState.AddModelError("email", "The Email is Invalid");
+                return View("Registerion");
+            }
+
         }
+
+
 
         [HttpGet]
         public IActionResult Registerion_ins()
@@ -40,22 +54,30 @@ namespace exam_system.Controllers
         [HttpPost]
         public IActionResult Registerion_ins(ins_reg ins_reg)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Instractor ins = new Instractor()
+                if (ModelState.IsValid)
                 {
-                    Id = ins_reg.Id,
-                    Name = ins_reg.Name,
-                    Email = ins_reg.Email,
-                    Password = ins_reg.Password,
-                };
-                context.instractors.Add(ins);
-                context.SaveChanges();
-                return RedirectToAction("Index", "Home");
-            }
-            else
+                    Instractor ins = new Instractor()
+                    {
+                        Id = ins_reg.Id,
+                        Name = ins_reg.Name,
+                        Email = ins_reg.Email,
+                        Password = ins_reg.Password,
+                    };
+                    context.instractors.Add(ins);
+                    context.SaveChanges();
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    return View(ins_reg);
+                }
+            }catch(Exception ex)
+
             {
-                return View(ins_reg);
+                ModelState.AddModelError("Email", "The Email is Invalid");
+                return View("Registerion_ins");
             }
         }
 
@@ -99,7 +121,7 @@ namespace exam_system.Controllers
                     HttpContext.Session.SetInt32("UserID", student.Id);
                     HttpContext.Session.SetString("UserName", student.Name);
                     HttpContext.Session.SetString("UserType", "Student");
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Exam");
                 }             
             }
             else

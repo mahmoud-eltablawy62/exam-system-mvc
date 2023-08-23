@@ -1,0 +1,41 @@
+﻿@model List<Questions> 
+@{
+    ViewData["Title"] = "Check";
+    int index = 1;
+}
+
+
+
+<form action="/Exam/result">
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Head</th>
+            <th scope="col">body</th>
+            <th scope="col">answer</th>
+            
+            
+        </tr>
+    </thead>
+    <tbody>
+            @for (int i=0 ; i<Model.Count; i++)
+            {
+            <tr>
+                <th scope="row">@(index++)</th>
+               
+                    <td>@Model[i].head</td>
+                    <td>@Model[i].body </td>
+                  
+
+                    <td>
+                        <input  type="text" asp-for="@Model[i].answer_stud">
+                    </td>
+            </tr>
+        }
+    </tbody>
+</table>
+    <button type="submit" class="btn btn-primary">Submit</button>
+   </form>
+
+

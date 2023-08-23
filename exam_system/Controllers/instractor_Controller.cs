@@ -1,7 +1,8 @@
 ﻿using exam_system.Models;
 
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace exam_system.Controllers
 {
@@ -22,7 +23,7 @@ namespace exam_system.Controllers
 
         [HttpGet]
         public IActionResult Add()
-        {
+        {      
             return View();
         }
         [HttpPost]
@@ -35,7 +36,8 @@ namespace exam_system.Controllers
                 body = qs.body,
                 answer = qs.answer,
                 ins_id = HttpContext.Session.GetInt32("UserID"),
-            };
+              
+            };                
             Context.questions.Add(ques);
             Context.SaveChanges();
             return RedirectToAction("Index");
@@ -56,6 +58,13 @@ namespace exam_system.Controllers
             OldQuestion.answer = question.answer; 
             
             Context.SaveChanges();         
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete (int id) {
+            Questions ques= Context.questions.SingleOrDefault(q => q.Id == id);
+            Context.questions.Remove(ques);
+            Context.SaveChanges();
             return RedirectToAction("Index");
         }
 

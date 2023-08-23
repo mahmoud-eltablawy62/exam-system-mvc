@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    int index = 1;
+}
+@model List<Student>
+
+<form action="/Student/check" >
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">choice</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Grade</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+            @for (int i=0 ; i<Model.Count; i++)
+            {
+            <tr>
+                <th scope="row">@(index++)</th>
+                <td>  
+                    <input class="form-check-input" type="checkbox" asp-for="@Model[i].choice">
+                </td>
+                    <td>@Model[i].Name</td>
+                    <td>@Model[i].email </td>
+                    <td>@Model[i].grade</td>
+            </tr>
+        }
+    </tbody>
+</table>
+    <button type="submit" class="btn btn-primary">Submit</button>
+   </form>

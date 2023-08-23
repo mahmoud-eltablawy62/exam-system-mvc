@@ -8,6 +8,7 @@ namespace exam_system.Models
         public string head { get; set; }
         public string body { get; set; }
         public string answer { get; set; }
+        public string? answer_stud { get; set; }
 
         [ForeignKey("Ins")]
         public int? ins_id { get; set; }
@@ -16,6 +17,5 @@ namespace exam_system.Models
         [ForeignKey("Exams")]
         public int? exam_id { get; set; }
         public Exam? Exams { get; set; }
-
     }
 }

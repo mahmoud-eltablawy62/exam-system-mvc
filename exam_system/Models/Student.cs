@@ -9,12 +9,16 @@ namespace exam_system.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "*")]   
+        [Required(ErrorMessage = "*")]
         public string email { get; set; }
         public string Password { get; set; }
         public int grade { get; set; }
-        public List<Ins_Stud>? ins_studs { get;}
+
+        [ForeignKey("ins")]
+        public int? ins_id { get; set; } 
+       public Instractor? ins { get; set; }
+        public bool choice { get; set; }
+
         
-       
     }
 }

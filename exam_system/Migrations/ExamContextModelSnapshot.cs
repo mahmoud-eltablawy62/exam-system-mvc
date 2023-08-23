@@ -50,21 +50,6 @@ namespace exam_system.Migrations
                     b.ToTable("exam_Students");
                 });
 
-            modelBuilder.Entity("exam_system.Models.Ins_Stud", b =>
-                {
-                    b.Property<int>("Stud_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Ins_Id")
-                        .HasColumnType("int");
-
-                    b.HasKey("Stud_Id", "Ins_Id");
-
-                    b.HasIndex("Ins_Id");
-
-                    b.ToTable("ins_studs");
-                });
-
             modelBuilder.Entity("exam_system.Models.Instractor", b =>
                 {
                     b.Property<int>("Id")
@@ -75,7 +60,7 @@ namespace exam_system.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -86,6 +71,9 @@ namespace exam_system.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("instractors");
                 });
@@ -100,6 +88,9 @@ namespace exam_system.Migrations
 
                     b.Property<string>("answer")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("answer_stud")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("body")
@@ -141,6 +132,9 @@ namespace exam_system.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("choice")
+                        .HasColumnType("bit");
+
                     b.Property<string>("email")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -148,10 +142,15 @@ namespace exam_system.Migrations
                     b.Property<int>("grade")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ins_id")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("email")
                         .IsUnique();
+
+                    b.HasIndex("ins_id");
 
                     b.ToTable("students");
                 });
@@ -175,25 +174,6 @@ namespace exam_system.Migrations
                     b.Navigation("stds");
                 });
 
-            modelBuilder.Entity("exam_system.Models.Ins_Stud", b =>
-                {
-                    b.HasOne("exam_system.Models.Instractor", "Incs")
-                        .WithMany("ins_studs")
-                        .HasForeignKey("Ins_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("exam_system.Models.Student", "Studs")
-                        .WithMany("ins_studs")
-                        .HasForeignKey("Stud_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Incs");
-
-                    b.Navigation("Studs");
-                });
-
             modelBuilder.Entity("exam_system.Models.Questions", b =>
                 {
                     b.HasOne("exam_system.Models.Exam", "Exams")
@@ -209,16 +189,20 @@ namespace exam_system.Migrations
                     b.Navigation("Ins");
                 });
 
+            modelBuilder.Entity("exam_system.Models.Student", b =>
+                {
+                    b.HasOne("exam_system.Models.Instractor", "ins")
+                        .WithMany("students")
+                        .HasForeignKey("ins_id");
+
+                    b.Navigation("ins");
+                });
+
             modelBuilder.Entity("exam_system.Models.Instractor", b =>
                 {
                     b.Navigation("Ques");
 
-                    b.Navigation("ins_studs");
-                });
-
-            modelBuilder.Entity("exam_system.Models.Student", b =>
-                {
-                    b.Navigation("ins_studs");
+                    b.Navigation("students");
                 });
 #pragma warning restore 612, 618
         }
