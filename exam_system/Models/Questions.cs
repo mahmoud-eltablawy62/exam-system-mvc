@@ -14,8 +14,5 @@ namespace exam_system.Models
         public int? ins_id { get; set; }
         public Instractor? Ins { get; set; }
 
-        [ForeignKey("Exams")]
-        public int? exam_id { get; set; }
-        public Exam? Exams { get; set; }
     }
 }

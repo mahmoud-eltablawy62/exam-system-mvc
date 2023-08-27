@@ -7,8 +7,7 @@ namespace exam_system.Models
     public class ExamContext : DbContext
     {
         public DbSet<Student> students { get; set; }    
-        public DbSet<Exam> exams { get; set; }
-        public DbSet<Exam_Student> exam_Students { get; set; }
+      
         public DbSet<Instractor> instractors { get; set; }  
         public DbSet<Questions> questions { get; set; }
         
